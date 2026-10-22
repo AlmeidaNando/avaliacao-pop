@@ -1,23 +1,286 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<title>Teste</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação POP - Field Service e Service Desk</title>
+
+<style>
+body{
+    font-family: Segoe UI, Arial, sans-serif;
+    background:#f3f2f1;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+h1{
+    color:#0078D4;
+    text-align:center;
+}
+
+h3{
+    color:#333;
+}
+
+.question{
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin:10px 0;
+    cursor:pointer;
+}
+
+input[type="text"]{
+    width:100%;
+    padding:10px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#0078D4;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#005ea6;
+}
+
+.resultado{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    border-radius:8px;
+}
+
+.aprovado{
+    background:#dff6dd;
+    border:2px solid #107C10;
+}
+
+.reprovado{
+    background:#fde7e9;
+    border:2px solid #D13438;
+}
+
+.nota{
+    font-size:32px;
+    font-weight:bold;
+}
+
+.certificado{
+    display:none;
+    margin-top:30px;
+    border:4px solid #0078D4;
+    border-radius:10px;
+    padding:30px;
+    text-align:center;
+    background:white;
+}
+
+@media print{
+    body *{
+        visibility:hidden;
+    }
+
+    #certificado,
+    #certificado *{
+        visibility:visible;
+    }
+
+    #certificado{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<h1>Funcionou!</h1>
+<div class="container">
 
-<label>
-<input type="radio" name="q1">
-Opção A
-</label>
+<h1>Avaliação POP</h1>
 
-<br><br>
+<p><strong>Nota mínima para aprovação: 60%</strong></p>
 
-<label>
-<input type="radio" name="q1">
-Opção B
-</label>
+<label>Nome do Colaborador</label>
+<input type="text" id="nome">
+
+<div class="question">
+<h3>1. O que o colaborador deve fornecer ao setor quando entra de férias, retorna de férias, é promovido, contratado ou desligado?</h3>
+
+<label><input type="radio" name="q1" value="a"> 1 refrigerante e 1 pacote de biscoito</label>
+<label><input type="radio" name="q1" value="b"> 1 cento de salgados e 2 Coca-Colas</label>
+<label><input type="radio" name="q1" value="c"> 2 centos de salgados e 1 Coca-Cola</label>
+<label><input type="radio" name="q1" value="d"> Nenhuma alternativa</label>
+</div>
+
+<div class="question">
+<h3>2. Qual é a penalidade para quem escalona um chamado sem notas, evidências ou explicações?</h3>
+
+<label><input type="radio" name="q2" value="a"> Advertência formal</label>
+<label><input type="radio" name="q2" value="b"> Pagamento de 1 Coca-Cola e uma Paçoca</label>
+<label><input type="radio" name="q2" value="c"> Pagamento de 2 Coca-Colas</label>
+<label><input type="radio" name="q2" value="d"> Nenhuma alternativa</label>
+</div>
+
+<div class="question">
+<h3>3. De acordo com o item IN MEMORIAM, qual orientação deve ser seguida?</h3>
+
+<label><input type="radio" name="q3" value="a"> Consultar o Xandão antes de investir</label>
+<label><input type="radio" name="q3" value="b"> Nunca seguir conselhos financeiros do Xandão</label>
+<label><input type="radio" name="q3" value="c"> Solicitar aprovação financeira ao Xandão</label>
+<label><input type="radio" name="q3" value="d"> Compartilhar dicas financeiras do Xandão</label>
+</div>
+
+<div class="question">
+<h3>4. O que deve ser feito quando um chamado urgente chega próximo ao final do expediente?</h3>
+
+<label><input type="radio" name="q4" value="a"> Ignorar até o próximo dia útil</label>
+<label><input type="radio" name="q4" value="b"> Encerrar o expediente normalmente</label>
+<label><input type="radio" name="q4" value="c"> Comunicar os colegas e avaliar o direcionamento correto</label>
+<label><input type="radio" name="q4" value="d"> Escalonar para qualquer outro time</label>
+</div>
+
+<div class="question">
+<h3>5. Qual é uma das responsabilidades dos jovens aprendizes e estagiários?</h3>
+
+<label><input type="radio" name="q5" value="a"> Aprovar mudanças de infraestrutura</label>
+<label><input type="radio" name="q5" value="b"> Participar das decisões estratégicas</label>
+<label><input type="radio" name="q5" value="c"> Imprimir o cardápio semanal e disponibilizá-lo no quadro</label>
+<label><input type="radio" name="q5" value="d"> Autorizar escalonamentos críticos</label>
+</div>
+
+<button onclick="corrigir()">Finalizar Avaliação</button>
+
+<div id="resultado" class="resultado"></div>
+
+<div id="certificado" class="certificado">
+
+<h2>CERTIFICADO DE CONCLUSÃO</h2>
+
+<p>Certificamos que</p>
+
+<h2 id="nomeCertificado"></h2>
+
+<p>concluiu a Avaliação POP Field Service e Service Desk.</p>
+
+<p id="notaCertificado"></p>
+
+<br>
+
+<button onclick="window.print()">
+🖨️ Imprimir / Salvar PDF
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function corrigir(){
+
+    const nome = document.getElementById("nome").value.trim();
+
+    if(nome === ""){
+        alert("Informe seu nome.");
+        return;
+    }
+
+    const corretas = {
+        q1:"b",
+        q2:"b",
+        q3:"b",
+        q4:"c",
+        q5:"c"
+    };
+
+    let acertos = 0;
+
+    for(const questao in corretas){
+
+        const resposta = document.querySelector(
+            'input[name="' + questao + '"]:checked'
+        );
+
+        if(!resposta){
+            alert("Responda todas as perguntas.");
+            return;
+        }
+
+        if(resposta.value === corretas[questao]){
+            acertos++;
+        }
+    }
+
+    const percentual =
+        Math.round((acertos / 5) * 100);
+
+    const resultado =
+        document.getElementById("resultado");
+
+    resultado.style.display = "block";
+
+    if(percentual >= 60){
+
+        resultado.className =
+            "resultado aprovado";
+
+        resultado.innerHTML =
+            "<h2>✅ APROVADO</h2>" +
+            "<p><strong>" + nome + "</strong></p>" +
+            "<div class='nota'>" + percentual + "%</div>" +
+            "<p>Acertos: " + acertos + " de 5</p>";
+
+        document.getElementById("nomeCertificado").innerText = nome;
+
+        document.getElementById("notaCertificado").innerHTML =
+            "<strong>Nota Final: " + percentual + "%</strong>";
+
+        document.getElementById("certificado").style.display = "block";
+
+    }else{
+
+        resultado.className =
+            "resultado reprovado";
+
+        resultado.innerHTML =
+            "<h2>❌ REPROVADO</h2>" +
+            "<p><strong>" + nome + "</strong></p>" +
+            "<div class='nota'>" + percentual + "%</div>" +
+            "<p>Acertos: " + acertos + " de 5</p>" +
+            "<p>Nota mínima: 60%</p>";
+
+        document.getElementById("certificado").style.display = "none";
+    }
+
+    resultado.scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+</script>
 
 </body>
 </html>
