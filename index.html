@@ -1,32 +1,47 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Teste Avaliação</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação POP</title>
+
 <style>
 body{
-    font-family: Arial;
-    margin:40px;
+    font-family:Segoe UI, Arial, sans-serif;
+    background:#f5f5f5;
+    padding:20px;
 }
+
+.container{
+    max-width:900px;
+    background:#fff;
+    margin:auto;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h1{
+    color:#0078D4;
+}
+
+.pergunta{
+    margin-bottom:25px;
+}
+
 label{
     display:block;
-    margin:10px 0;
+    margin:8px 0;
+    cursor:pointer;
 }
-</style>
-</head>
-<body>
 
-<h1>Avaliação POP</h1>
+button{
+    background:#0078D4;
+    color:#fff;
+    border:none;
+    padding:12px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
 
-<label>
-    <input type="radio" name="q1" value="a">
-    Opção A
-</label>
-
-<label>
-    <input type="radio" name="q1" value="b">
-    Opção B
-</label>
-
-</body>
-</html>
+.resultado{
